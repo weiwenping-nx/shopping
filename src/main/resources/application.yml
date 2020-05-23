@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: awen
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: oracle.jdbc.OracleDriver
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    #validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+      #login-username: admin
+      #login-password: admin
+    filters: stat,wall,slf4j
+    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    use-global-data-source-stat: true
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: false
+      wall:
+        config:
+          multi-statement-allow: true
+server:
+  port: 9000
+  servlet:
+    context-path: /hello
+logging:
+  level:
+    root: info
